@@ -1,0 +1,232 @@
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# chose a FreeType font, such as:
+font pango: lemon 11px, FontAwesome 8px
+
+set $WS1 ""
+set $WS2 ""
+set $WS3 ""
+set $WS4 ""
+set $WS5 ""
+set $WS6 ""
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+#BORDER
+hide_edge_borders both
+new_float pixel 0
+new_window pixel 0
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run -b -fn 'lemon'  -nb '#FFFFFF' -nf '#000000' -sb '#A1D569'
+# There also is the (new) i3kdmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+ 
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+bar {
+mode dock
+position top
+workspace_buttons yes
+font pango: Lemon 13px
+status_command ~/.config/i3/scripts/conky.sh
+colors {
+#        background #252525
+	background #FFFFFF
+        statusline #999999
+			  #BORDER #BACKGROUND #TEXT
+#        focused_workspace #292929  #292929 #cccccc
+	focused_workspace #FFFFFF #FFFFFF #000000
+#        inactive_workspace #252525 #252525 #6b6b6b
+        inactive_workspace  #FFFFFF #FFFFFF #999999
+
+        urgent_workspace #b492b6 #b492b6 #cccccc
+    } }
+
+
+
+#Shutdown,Reboot,Lock Screen
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+x mode "$mode_system"
+
+# MPD controls
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPlay exec mpc toggle
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec mpc volume +5
+bindsym XF86AudioLowerVolume exec mpc volume -5
+
+
+# autostart programs
+#exec_always --no-startup-id compton --config ~/.config/compton/compton.conf -b
+exec_always --no-startup-id compton -o 0.6 -r 20 -l -30 -t -10 -cCGb
+exec --no-startup-id nitrogen --restore
+#exec --no-startup-id setxkbmap us
+exec --no-startup-id xset m 3 1
+exec --no-startup-id urxvtd -q -f -o
+exec --no-startup-id xset s off
+exec --no-startup-id xset s noblank
+exec --no-startup-id xset -dpms
+exec --no-startup-id mpd
+exec --no-startup-id mpc pause
+exec --no-startup-id qupzilla
+exec --no-startup-id termite
+exec --no-startup-id transmission-gtk
+exec --no-startup-id skype
+
+
+bindsym $mod+F5 exec --no-startup-id xbacklight -dec 10
+bindsym $mod+F6 exec --no-startup-id xbacklight -inc 10
+
+bindsym $mod+b exec qupzilla
+bindsym $mod+c exec lighthouse | sh
+bindsym $mod+ctrl+f exec thunar
+bindsym $mod+g exec geany
+bindsym $mod+i exec insync start
+bindsym $mod+alt+l exec leafpad
+bindsym $mod+ctrl+l exec lxappearance
+bindsym $mod+m exec nylas-mail
+bindsym $mod+n exec nitrogen
+#bindsym $mod+r mode "resize"
+bindsym $mod+ctrl+s exec gimp
+bindsym $mod+t exec termite
+
+# assign windows
+assign [class="Qupzilla"] ""
+assign [class="Termite"]  ""
+assign [class="Nylas-Mail"]   ""
+assign [class="Transmission-gtk"] ""
+assign [class="Weechat"] ""
+assign [class="Steam"]    ""
+assign [class="Nitrogen"] ""
+assign [class="mpv"]      ""
+
+for_window [class="Thunar"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="termite"] floating enable
+for_window [class="urxvt"] floating enable
+for_window [class="leafpad"] floating enable

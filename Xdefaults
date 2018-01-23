@@ -1,0 +1,77 @@
+!!!!!! XConfig file !!!!!!
+
+
+!!! ROFI !!!
+! ! Use extended color schem
+rofi.color-enabled:                  true
+! Color scheme for normal row
+rofi.color-normal:                   argb:00000000,  #D8DEE9 , argb:00000000,  #FAC863 ,  #000000
+! ! Color scheme for urgent row
+rofi.color-urgent:                   argb:00000000,  #F99157 , argb:00000000,  #F99157 ,  #000000
+! ! Color scheme for active row
+rofi.color-active:                   argb:00000000,  #000000 , argb:00000000,  #000000 ,  #000000
+! ! Color scheme window
+rofi.color-window:                   argb:ee222222,  #FAC863 ,  #FAC863
+! ! Separator style (none, dash, solid)
+rofi.separator-style:                dash
+
+
+
+!!! URxvt-unicode !!!
+! Terminal
+URxvt*termName: screen-256color
+! Transparency
+urxvt*transparent : true
+urxvt*shading : 5
+! Font
+urxvt*font: xft:ohsnap:size=8:antialias=false		
+urxvt*boldFont: xft:ohsnap:size=8:antialias=false
+urxvt*italicFont: xft:ohsnap:size=8:antialias=false
+urxvt*bolditalicFont: xft:ohsnap:size=8:antialias=false
+! Scroll
+urxvt*scrollBar: false
+! Settings
+urxvt*internalBorder: 3
+URxvt*cursorUnderline: true
+URxvt*cursorBlink: true
+URxvt*savelines: 10000
+! Optionnal settings
+URxvt.letterSpace:1
+! Perl extensions
+URxvt.url-launcher: /usr/bin/qupzilla
+URxvt.matcher.button: 1
+URxvt.colorBD: white
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: False
+URxvt.perl-ext-common: default,clipboard,matcher
+URxvt*perl-ext:
+URxvt*perl-ext-common:
+! Colorscheme
+*foreground: #E5D2A5
+*background: #181512
+! Black Black !
+*color0: #252525
+*color8: #454545
+! Red Red !
+*color1: #CB4F29
+*color9: #CB4F29
+! Green Green !
+*color2: #A2B272
+*color10: #B9C88E
+! Yellow Yellow!
+*color3: #FFEB65
+*color11: #FFEB65
+! Blue Blue !
+*color4: #7A9388
+*color12: #94B1A3
+! Magenta Magenta
+*color5: #CB4F29
+*color13: #CB4F29
+!*color5: #F79F81 
+!*color13: #F79F81
+! Cyan Cyan !
+*color6: #767D75
+*color14: #9DA69E
+! White White !
+*color7: #F9F9F9
+*color15: #F9F9F9

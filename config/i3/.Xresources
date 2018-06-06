@@ -1,0 +1,84 @@
+﻿! Rofi
+rofi.color-enabled: true
+rofi.color-window: #ffffff, #ffffff, #ffffff
+rofi.color-normal: #ffffff, #4a4a4a, #ffffff, #ffffff, #81a1c1
+rofi.color-active: #ffffff, #f8c18c, #ffffff, #ffffff, #81a1c1
+rofi.color-urgent: #ffffff, #e85e5c, #ffffff, #ffffff, #BF616A
+
+! Font
+*font : Iosevka Term 8
+
+! XFT Font Config
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+!!! URxvt-unicode !!!
+! Terminal
+URxvt*termName: screen-256color
+! Transparency
+urxvt*transparent : true
+urxvt*shading : 25
+! Font
+urxvt*font: xft:Hack:size=8:antialias=false
+urxvt*boldFont: xft:Hack:size=8:antialias=false
+urxvt*italicFont: xft:Hack:size=8:antialias=false
+urxvt*bolditalicFont: xft:Hack:size=8:antialias=false
+! Scroll
+urxvt*scrollBar: false
+! Settings
+urxvt*internalBorder: 3
+URxvt*cursorUnderline: true
+URxvt*cursorBlink: true
+URxvt*savelines: 10000
+! Optionnal settings
+URxvt.letterSpace:1
+! Perl extensions
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.colorBD: white
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: False
+URxvt.perl-ext-common: default,clipboard,matcher
+URxvt*perl-ext:
+URxvt*perl-ext-common:
+
+! Enables copy/paste with Ctrl-Shift-C/V
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.perl-ext-common: default,clipboard
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:past
+
+! Colorscheme
+*foreground: #E5D2A5
+*background: #171717
+! Black Black !
+*color0: #252525
+*color8: #454545
+! Red Red !
+*color1: #CB4F29
+*color9: #CB4F29
+! Green Green !
+*color2: #A2B272
+*color10: #B9C88E
+! Yellow Yellow!
+*color3: #FFEB65
+*color11: #FFEB65
+! Blue Blue !
+*color4: #7A9388
+*color12: #94B1A3
+! Magenta Magenta
+*color5: #CB4F29
+*color13: #CB4F29
+!*color5: #F79F81
+!*color13: #F79F81
+! Cyan Cyan !
+*color6: #767D75
+*color14: #9DA69E
+! White White !
+*color7: #F9F9F9
+*color15: #F9F9F9

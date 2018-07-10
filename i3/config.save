@@ -1,0 +1,139 @@
+# Border Styles
+new_window pixel 0
+new_float normal
+
+# Font
+font pango: Iosevka Term 9
+
+# Variables
+set $sup Mod1 
+set $mod Mod4
+set $terminal termite
+set $ws1 1:◈
+set $ws2 2:◈
+set $ws3 3:◈
+set $ws4 4:◈
+set $ws5 5:◈
+set $ws6 6:◈
+
+# i3 Admin Commands
+bindsym $mod+F1 restart
+bindsym $mod+F2 reload
+
+# Bash Scripts
+
+# Programs
+bindsym $mod+Return  exec $terminal
+
+# Lock Screen
+bindsym $mod+l       exec --no-startup-id betterlockscreen --lock
+
+# Screen Record
+bindsym $mod+r       exec --no-startup-id record;exec notify-send "Started Recording"
+bindsym $mod+Shift+r exec --no-startup-id stop-recording; exec notify-send "Ended Recording"
+# Rofi
+bindsym $mod+d       exec --no-startup-id rofi-apps
+
+# Skippy-XD
+bindsym $mod+s       exec --no-startup-id  skippy-xd;exec notify-send "Exposed"
+
+# Screenshot
+bindsym $mod+Print   exec --no-startup-id screeny;exec notify-send "Screenshot Taken"
+
+# Notifications 
+bindsym $sup+1 exec notify-weather
+bindsym $sup+2 exec notify-clock
+bindsym $sup+3 exec notify-music
+
+# Windows
+
+# Kill
+bindsym $mod+Shift+q kill 
+
+# Focus
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# Movement
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# Splitting
+bindsym $mod+h split h;exec notify-send "Tiling Horizontally"
+bindsym $mod+v split v;exec notify-send "Tiling Vertically"
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle;exec notify-send "Fullscreen Toggled"
+
+# Floating
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle;exec notify-send "Floating Toggled"
+bindsym $mod+space focus mode_toggle
+
+# Parent/Child Focus
+bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+
+# Resizing
+bindsym $sup+Left        resize shrink width  5 px or 5 ppt
+bindsym $sup+Down        resize grow   height 5 px or 5 ppt
+bindsym $sup+Up          resize shrink height 5 px or 5 ppt
+bindsym $sup+Right       resize grow   width  5 px or 5 ppt
+
+bindsym $sup+Shift+Left  resize shrink width  1 px or 1 ppt
+bindsym $sup+Shift+Down  resize grow   height 1 px or 1 ppt
+bindsym $sup+Shift+Up    resize shrink height 1 px or 1 ppt
+bindsym $sup+Shift+Right resize grow   width  1 px or 1 ppt
+
+# Gaps
+gaps inner 15
+gaps outer 25
+
+# Workspaces
+
+# Movement
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+
+# Active
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+
+# Pulse Audio Controls
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   0 toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+
+# Brightness Controls
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+
+# Media Player Controls
+bindsym XF86AudioPlay  exec --no-startup-id mpc -p 6610 play
+bindsym XF86AudioPause exec --no-startup-id mpc -p 6610 pause
+bindsym XF86AudioNext  exec --no-startup-id mpc -p 6610 next
+bindsym XF86AudioPrev  exec --no-startup-id mpc -p 6610 prev
+
+# Autostart
+exec        --no-startup-id feh --bg-fill Pictures/Wallpapers/pastelOne.jpg
+exec        --no-startup-id mpc -p 6610
+exec        --no-startup-id compton
+exec        --no-startup-id nm-applet
+exec        --no-startup-id xsettingsd
+exec        --no-startup-id volumeicon
+exec        --no-startup-id pulseaudio
+exec        --no-startup-id pa-applet
+exec        --no-startup-id dunst
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh

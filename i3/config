@@ -1,0 +1,189 @@
+# Border Styles
+new_window pixel 0
+new_float normal
+
+# Font
+font pango: Iosevka Term 9
+
+# Variables
+set $mod1 Mod1
+set $mod Mod4
+set $terminal termite
+
+set $ws1 1:◈
+set $ws2 2:◈
+set $ws3 3:◈
+set $ws4 4:◈
+set $ws5 5:◈
+set $ws6 6:◈
+
+# i3 Admin Commands
+bindsym $mod+F1 restart
+bindsym $mod+F2 reload
+
+## Enter "Power-Off Mode"
+bindsym $mod+Escape mode "$mode_system"
+
+## Switch to Power-Off mode
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) shutdown
+mode "$mode_system" {
+
+	 bindsym l exec --no-startup-id betterlockscreen -l dimblur, mode "default"
+	 bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	 bindsym s exec --no-startup-id "sudo pm-suspend", mode "default"
+	 bindsym h exec --no-startup-id "sudo pm-hibernate", mode "default"
+	 bindsym r exec --no-startup-id systemctl reboot, mode "default"
+	 bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+
+	 ### Return back to normal
+	 bindsym Return mode "default"
+	 bindsym Escape mode "default"
+}
+
+# Bash Scripts
+
+# Programs
+bindsym $mod+Return  exec $terminal
+bindsym $mod+t 	     exec urxvt-unicode
+
+# Screen Record
+bindsym $mod+r       exec --no-startup-id record;exec notify-send "Started Recording"
+bindsym $mod+Shift+r exec --no-startup-id stop-recording; exec notify-send "Ended Recording"
+
+# Rofi
+bindsym $mod+d       exec --no-startup-id "rofi -show run"
+
+# Skippy-XD
+bindsym $mod+s       exec --no-startup-id  skippy-xd;exec notify-send "Exposed"
+
+# Screenshot
+bindsym Print exec scrot ~/Pictures/Screenshots/$(date +%s).png
+
+# Notifications
+bindsym $mod1+1 exec notify-weather
+bindsym $mod1+2 exec notify-clock
+bindsym $mod1+3 exec notify-music
+
+
+
+# Windows
+
+# Kill
+bindsym $mod+Shift+q kill
+
+# Focus
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# Movement
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# Splitting
+bindsym $mod+h split h;exec notify-send "Tiling Horizontally"
+bindsym $mod+v split v;exec notify-send "Tiling Vertically"
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle;exec notify-send "Fullscreen Toggled"
+
+# Floating
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle;exec notify-send "Floating Toggled"
+bindsym $mod+space focus mode_toggle
+
+# Parent/Child Focus
+bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+
+# Resizing
+bindsym $mod1+Left        resize shrink width  5 px or 5 ppt
+bindsym $mod1+Down        resize grow   height 5 px or 5 ppt
+bindsym $mod1+Up          resize shrink height 5 px or 5 ppt
+bindsym $mod1+Right       resize grow   width  5 px or 5 ppt
+
+bindsym $mod1+Shift+Left  resize shrink width  1 px or 1 ppt
+bindsym $mod1+Shift+Down  resize grow   height 1 px or 1 ppt
+bindsym $mod1+Shift+Up    resize shrink height 1 px or 1 ppt
+bindsym $mod1+Shift+Right resize grow   width  1 px or 1 ppt
+
+# Gaps
+gaps inner 15
+gaps outer 25
+
+# Workspaces
+
+# Movement
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+
+# Active
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+
+# Pulse Audio Controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec --no-startup-id pamixer -t && pkill -RTMIN+1 i3blocks
+
+# Brightness Controls
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+
+# Media Player Controls
+bindsym XF86AudioPlay  exec --no-startup-id mpc -p 6610 play
+bindsym XF86AudioPause exec --no-startup-id mpc -p 6610 pause
+bindsym XF86AudioNext  exec --no-startup-id mpc -p 6610 next
+bindsym XF86AudioPrev  exec --no-startup-id mpc -p 6610 prev
+
+# Autostart
+
+
+#exec        --no-startup-id xsetroot -solid "#6f7f71"
+exec_always --no-startup-id "nitrogen --restore"
+exec 	      --no-startup-id insync
+exec        --no-startup-id mpc -p 6610
+exec        --no-startup-id compton
+#exec        --no-startup-id nm-applet
+exec        --no-startup-id xsettingsd
+exec        --no-startup-id volumeicon
+exec        --no-startup-id pulseaudio
+exec        --no-startup-id pa-applet
+exec        --no-startup-id dunst
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+
+# Status bar
+bindsym $mod+m bar mode invisible
+bindsym $mod+Shift+M bar mode dock
+
+#bar
+#{
+#	font pango:FontAwesome 8, Iosevka Nerd Font 8
+#	separator_symbol " "
+#	position bottom
+#	status_command i3status -c ~/.config/i3/i3status.conf
+#  strip_workspace_numbers yes
+#colors {
+#        background #171717
+#        statusline #ffffff
+#        separator #535c5c
+
+#        focused_workspace  #171717 #171717 #ecedee
+#        active_workspace   #ecedee #ecedee #ecedee
+#        inactive_workspace #171717 #171717 #383c4a
+#				urgent_workspace   #171717 #171717 #383c4a
+
+#}
+#}

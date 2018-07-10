@@ -1,0 +1,371 @@
+[colors]
+background		= #002f343f
+foreground		= #f5f8f6
+
+black			= #5b4848
+red			= #cb6077
+green			= #bec55b
+yellow			= #e4bc87
+blue			= #8ab3d5
+magenta			= #a89bb9
+cyan			= #7bcdb4
+white			= #e0d8d6
+
+lightblack		= #736060
+lightred		= #e3788f
+lightgreen		= #d6ed73
+lightyellow		= #fcd49f
+lightblue		= #a2cbed
+lightmagenta		= #c0b3d1
+lightcyan		= #93e5cc
+lightwhite		= #f8f0ee
+
+[bar/top]
+monitor = LVDS1
+width = 100%
+height = 17
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-color = ${colors.background}
+line-size = 16
+
+spacing = 1
+padding-right = 2
+padding-left = 2
+module-margin = 2
+;border-top-size = -2
+border-bottom-size = 2
+
+font-0 = mplus Nerd Font:size=9:antialias=false;4
+font-1 = FontAwesome:pixelsize=12:antialias=false;4
+font-2 = MaterialIcons:size=12:antialias=false;4
+font-3 = Fira Sans:size=12:weight=regular;4
+font-4 = TakaoPGothic:size=10:weight=regular;4
+
+modules-left = mpd
+modules-right = wireless-network wired-network volume battery date
+
+tray-position = right
+tray-background = ${colors.background}
+
+;wm-restack = i3
+;override-redirect = true
+
+[bar/bottom]
+monitor = LVDS1
+bottom = true
+width = 100%
+height = 20
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-color = ${colors.background}
+line-size = 2
+
+spacing = 1
+padding-right = 1
+padding-left = 1
+module-margin-left = 2
+module-margin-right = 2
+border-top-size = -2
+
+font-0 = mplus Nerd Font:size=9:antialias=false;4
+font-1 = FontAwesome:pixelsize=12:antialias=false;4
+font-2 = MaterialIcons:size=12:antialias=false;4
+font-3 = Fira Sans:size=12:weight=regular;4
+font-4 = TakaoPGothic:size=10:weight=regular;4
+
+modules-left = ewmh i3 xwindow
+modules-right = cpu memory
+
+[module/backlight]
+type = internal/xbacklight
+format = <bar>
+format-prefix = "  "
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-font = 3
+bar-indicator-foreground = ${colors.foreground}
+bar-fill = ─
+bar-fill-font = 3
+bar-fill-foreground = ${colors.yellow}
+bar-empty = ─
+bar-empty-font = 3
+bar-empty-foreground = #777777
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:40:...%
+;format-prefix =  " "
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.background}
+label-indicator-underline = ${colors.background}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = 
+
+label-mode-padding = 2
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.background}
+
+; focused = Active workspace on focused monitor
+label-focused = %name%  %icon%
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.magenta}
+label-focused-padding = 3
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %name%  %icon%
+label-unfocused-padding = 3
+
+; visible = Active workspace on unfocused monitor
+label-visible = %name%  %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = 3
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%  %icon%
+label-urgent-background = ${self.label-focused-background}
+label-urgent-foreground = ${colors.yellow}
+label-urgent-padding = 3
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = true
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-5 = 6;
+icon-6 = 7;
+icon-7 = 8;
+icon-8 = 9;
+icon-9 = 10;
+icon-default = 
+format = <label-state>
+label-monitor = %name%
+label-active = %name% %index% 
+label-active-foreground = ${colors.cyan}
+label-active-background = ${colors.background}
+label-active-padding = 1
+
+label-inactive = %name% %index% 
+label-inactive-foreground = ${colors.foreground}
+label-inactive-background = ${colors.background}
+label-inactive-padding = 1
+
+label-occupied = %name% %index% 
+label-occupied-foreground = ${colors.foreground}
+label-occupied-background = ${colors.background}
+label-occupied-padding = 1
+
+label-urgent = %name% !
+label-urgent-foreground = ${colors.background}
+label-urgent-background = ${colors.lightred}
+label-urgent-padding = 1
+
+label-empty = %name% %index% 
+label-empty-foreground = ${colors.foreground}
+label-empty-background = ${colors.background}
+label-empty-padding = 1
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label> <ramp-coreload>
+label = CPU
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = ${colors.green}
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = ${colors.green}
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = ${colors.green}
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = ${colors.green}
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = ${colors.yellow}
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = ${colors.yellow}
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = ${colors.red}
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = ${colors.red}
+
+[module/date]
+type = internal/date
+format-foreground = ${colors.foreground}
+format-prefix = " "
+;date = %a, %d %B
+;date-alt = %Y-%m-%d
+date = %a, %d %B   %H:%M
+date-alt = %Y-%m-%d   %H:%M
+
+[module/memory]
+type = internal/memory
+format = <label><bar-used>
+label = RAM
+
+bar-used-width = 30
+bar-used-foreground-0 = ${colors.green}
+bar-used-foreground-1 = ${colors.green}
+bar-used-foreground-2 = ${colors.yellow}
+bar-used-foreground-3 = ${colors.red}
+bar-used-indicator = |
+bar-used-indicator-font = 6
+bar-used-indicator-foreground = ${colors.foreground}
+bar-used-fill = ─
+bar-used-fill-font = 6
+bar-used-empty = ─
+bar-used-empty-font = 6
+bar-used-empty-foreground = #777777
+
+[module/ncmpcpp]
+type = custom/script
+exec = echo "  "
+click-left = urxvt -geometry 70x10 -e ncmpcpp -c ~/.ncmpcpp/config-art
+label-foreground = ${colors.foreground}
+label-background = ${colors.background}
+
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6601
+;format-online = <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time> <label-song>
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next> <bar-progress> <label-time> <label-song>
+
+icon-play =
+icon-pause =
+icon-stop =
+icon-prev =
+icon-next =
+icon-random =
+icon-repeat =
+
+toggle-on-foreground =
+toggle-off-foreground = #777777
+
+bar-progress-width = 25
+bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
+bar-progress-indicator = |
+bar-progress-indicator-foreground = ${colors.foreground}
+bar-progress-indicator-font = 3
+bar-progress-fill = ─
+bar-progress-fill-foreground = ${colors.blue}
+bar-progress-fill-font = 3
+bar-progress-empty = ─
+bar-progress-empty-font = 3
+bar-progress-empty-foreground = #652f343f
+
+[module/wireless-network]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+ping-interval = 10
+
+label-connected = " %essid%"
+;label-disconnected = " No waifu detected"
+label-disconnected-foreground = ${colors.black}
+
+[module/wired-network]
+type = internal/network
+interface = enp1s0
+interval = 3.0
+
+format-connected-prefix = " "
+label-connected = %local_ip%
+
+[module/volume]
+type = internal/volume
+master-mixer = Master
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+;headphone-id = 9
+
+format-volume = <label-volume>
+format-volume-prefix = " "
+format-muted-prefix = " "
+label-muted = "muted "
+label-muted-foreground = ${colors.foreground}
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+full-at = 100
+
+format-charging = <animation-charging><label-charging>
+label-charging = "%percentage%%"
+format-discharging = <ramp-capacity><label-discharging>
+label-discharging = "%percentage%%"
+
+label-battery-foreground = ${colors.foreground}
+label-battery-background = ${colors.background}
+label-charging-foreground = ${colors.foreground}
+label-charging-background = ${colors.background
+label-discharging-foreground = ${colors.foreground}
+label-discharging-background = ${colors.background}
+format-charging-foreground = ${colors.foreground}
+format-charging-background = ${colors.background}
+format-discharging-foreground = ${colors.foreground}
+format-discharging-background = ${colors.background}
+
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-3 = ""
+ramp-capacity-4 = ""
+ramp-capacity-foreground = ${colors.foreground}
+ramp-capacity-background = ${colors.background}
+
+animation-charging-0 = ""
+animation-charging-1 = ""
+animation-charging-2 = ""
+animation-charging-3 = ""
+animation-charging-4 = ""
+animation-charging-foreground = ${colors.foreground}
+animation-charging-background = ${colors.background}
+animation-charging-framerate = 750
+
+; vim:ft=dosini
